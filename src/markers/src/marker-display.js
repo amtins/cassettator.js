@@ -76,15 +76,15 @@ class MarkerDisplay extends videojs.getComponent('component') {
 
     if (currentTime > markerEnd) {
       // Setting the value to 200% avoids losing pixel when resizing the player.
-      this.el().style.setProperty('--cst-marker-played', `200%`);
+      this.el().style.setProperty('--_cst-marker-played', `200%`);
     }
 
     if (currentTime < markerStart) {
-      this.el().style.setProperty('--cst-marker-played', `0%`);
+      this.el().style.setProperty('--_cst-marker-played', `0%`);
     }
 
     if (currentTime >= markerStart && currentTime <= markerEnd) {
-      this.el().style.setProperty('--cst-marker-played', `${Math.abs(percent) * 100}%`);
+      this.el().style.setProperty('--_cst-marker-played', `${Math.abs(percent) * 100}%`);
     }
   }
 

@@ -1,10 +1,10 @@
-.cassettator-markers .vjs-progress-holder,
-.cassettator-markers .vjs-load-progress,
-.cassettator-markers .vjs-load-progress div,
-.cassettator-markers .vjs-play-progress {
-  background-color: transparent;
+.cassettator-markers {
+  --cst-default-background-color: rgba(115, 133, 159, 0.5);
+  /* private variables */
+  --_cst-marker-played: 0%;
+  /* TODO implement buffered */
+  --cst-marker-buffered: 0%;
 }
-
 
 .cassettator-markers .vjs-time-tooltip {
   padding: var(--cst-time-tooltip, .15em .25em);
@@ -13,13 +13,6 @@
 .cassettator-markers .vjs-mouse-display .vjs-time-tooltip {
   white-space: nowrap;
   transform: translateX(-50%);
-
-
-  /* max-width: 10em;
-  background: blueviolet;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; */
 }
 
 /* remove mouse display flickering when hovering with the mouse */
@@ -28,7 +21,6 @@
 }
 
 .cst-markers {
-  --cst-markers-background-color : rgba(115, 133, 159, 0.5);
   width: 100%;
   height: 100%;
   display: flex;
@@ -37,23 +29,21 @@
 }
 
 .cst-markers:empty {
-  background: var(--cst-markers-background-color);
+  background: var(--cst-markers-background-color, var(--cst-default-background-color));
 }
 
 .cst-marker {
-  --cst-marker-played-background-color: #fff;
-  --cst-marker-buffered-background-color: transparent;
-  --cst-marker-background-color : var(--cst-markers-background-color);
-  --cst-marker-played: 0%;
-  /* TODO implement buffered */
-  --cst-marker-buffered: 0%;
-
   height: 100%;
-  background: linear-gradient(
-    to right,
-    var(--cst-marker-played-background-color) var(--cst-marker-played),
-    var(--cst-marker-buffered-background-color) 0 var(--cst-marker-buffered),
-    var(--cst-marker-background-color) 0%
-  );
+  background: linear-gradient(to right,
+      var(--cst-marker-played-background-color, #fff) var(--_cst-marker-played),
+      var(--cst-marker-buffered-background-color, transparent) 0 var(--cst-marker-buffered),
+      var(--cst-marker-background-color, var(--cst-default-background-color)) 0%);
   border-radius: var(--cst-marker-border-radius, 0.05em);
+}
+
+.cassettator-markers .vjs-progress-holder,
+.cassettator-markers .vjs-load-progress,
+.cassettator-markers .vjs-load-progress div,
+.cassettator-markers .vjs-play-progress {
+  background-color: transparent;
 }
