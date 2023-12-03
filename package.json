@@ -21,40 +21,19 @@
     "type": "git",
     "url": "git+https://github.com/amtins/cassettator.js.git"
   },
-  "main": "dist/index.js",
-  "global": "dist/cassettator.global.js",
+  "main": "dist/cassettator.es.min.js",
   "cassettator-markers-css": "dist/cassettator.markers.css",
   "browserslist": "defaults",
   "targets": {
-    "cassettator": {
-      "source": "src/index.js",
-      "distDir": "./dist",
-      "isLibrary": true,
-      "includeNodeModules": false,
-      "outputFormat": "esmodule",
-      "optimize": true
-    },
-    "global": {
-      "source": "src/browser.js",
-      "distDir": "./dist",
-      "isLibrary": false,
-      "includeNodeModules": true,
-      "outputFormat": "global",
-      "optimize": true
-    },
     "cassettator-markers-css": {
       "source": "src/markers/css/cassettator-markers.css",
-      "distDir": "./dist",
-      "isLibrary": false,
       "optimize": true
     }
   },
   "scripts": {
-    "build": "npm run build:cassettator && npm run build:browser && npm run build:css",
-    "build:cassettator": "parcel build --target cassettator",
-    "build:browser": "parcel build --target global",
+    "build": "npm run build:cassettator && npm run build:css",
+    "build:cassettator": "rollup -c rollup.config.mjs",
     "build:css": "parcel build --target cassettator-markers-css",
-    "builds": "parcel build",
     "start": "parcel -p 6969 src/**/*.html"
   },
   "files": [
@@ -67,7 +46,11 @@
     "video.js": ">=7"
   },
   "devDependencies": {
+    "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
     "buffer": "^6.0.3",
-    "parcel": "^2.10.3"
+    "parcel": "^2.10.3",
+    "rollup": "^4.6.1",
+    "rollup-plugin-bundle-size": "^1.0.3"
   }
 }
