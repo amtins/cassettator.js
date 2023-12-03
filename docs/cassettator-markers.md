@@ -31,7 +31,8 @@ You can customize the look and feel of these markers using CSS variables.
 
 | **Variable Name** | **Description** |
 |------------------|-----------------|
+| `--cst-default-background-color` | Sets default background color to be applied to `.cst-markers:empty` and `.cst-marker` |
 | `--cst-markers-background-color` | Sets the background color of the markers in the seek bar. |
+| `--cst-marker-background-color` | Sets the background color of the marker in the seek bar. |
 | `--cst-marker-played-background-color` | Sets the background color of the played portion of the marker. |
 | `--cst-marker-buffered-background-color` | Sets the background color of the buffered portion of the marker. |
-| `--cst-marker-background-color` | Sets the background color of the markers in the seek bar. |
