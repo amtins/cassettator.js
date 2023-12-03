@@ -75,8 +75,9 @@ class MarkersDisplay extends videojs.getComponent('component') {
     );
 
     if (!markersTrack) {
-      this.addChild('marker', {
+      this.addChild('marker-empty', {
         className: 'marker-empty',
+        componentClass: 'markerDisplay',
         startTime: 0,
         endTime: this.player().duration(),
       });
