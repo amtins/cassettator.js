@@ -3,7 +3,7 @@
   /* private variables */
   --_cst-marker-played: 0%;
   /* TODO implement buffered */
-  --cst-marker-buffered: 0%;
+  --_cst-marker-buffered: 0%;
 }
 
 .cassettator-markers .vjs-time-tooltip {
@@ -36,7 +36,7 @@
   height: 100%;
   background: linear-gradient(to right,
       var(--cst-marker-played-background-color, #fff) var(--_cst-marker-played),
-      var(--cst-marker-buffered-background-color, transparent) 0 var(--cst-marker-buffered),
+      var(--cst-marker-buffered-background-color, rgba(115, 133, 159, 0.7)) 0 var(--_cst-marker-buffered),
       var(--cst-marker-background-color, var(--cst-default-background-color)) 0%);
   border-radius: var(--cst-marker-border-radius, 0.05em);
 }

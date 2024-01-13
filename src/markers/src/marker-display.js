@@ -9,7 +9,7 @@ import videojs from 'video.js';
  */
 
 /**
- * A class representing a marker.
+ * A class representing a marker that will be displayed in the progress bar.
  *
  * @class
  * @extends Component
@@ -26,10 +26,12 @@ class MarkerDisplay extends videojs.getComponent('component') {
     super(player, options);
     const { gap } = options;
 
-    this.updateMarker = this.updateMarker.bind(this);
+    this.updateMarkerPlayed = this.updateMarkerPlayed.bind(this);
+    this.updateMarkerBuffered = this.updateMarkerBuffered.bind(this);
 
     this.setMarkerWidth(this.markerWidth(), gap);
-    this.player().on('timeupdate', this.updateMarker);
+    this.player().on('timeupdate', this.updateMarkerPlayed);
+    this.player().on('progress', this.updateMarkerBuffered);
   }
 
   /**
@@ -59,12 +61,13 @@ class MarkerDisplay extends videojs.getComponent('component') {
   }
 
   /**
-   * Updates the marker background color, which uses the player's current time
-   * to calculate the percentage of the marker that has been played.
+   * Updates the marker background color based on the provided time and the css
+   * variable name.
+   *
+   * @param {number} time - The time (in seconds).
+   * @param {string} cssVar - The CSS variable name.
    */
-  updateMarker() {
-    const currentTime = this.player().currentTime();
-
+  updateMarker(time = 0, cssVar) {
     const duration = this.player().duration();
     const markersElWidth = this.parentComponent_.el().getClientRects()[0].width;
     const markerOffsetLeft = this.el().offsetLeft;
@@ -72,20 +75,34 @@ class MarkerDisplay extends videojs.getComponent('component') {
     const markerStart = (duration * markerOffsetLeft) / markersElWidth;
     const markerEnd =
       (duration * (markerOffsetLeft + markerOffsetWidth)) / markersElWidth;
-    const percent = (currentTime - markerStart) / (markerStart - markerEnd);
+    const percent = (time - markerStart) / (markerStart - markerEnd);
 
-    if (currentTime > markerEnd) {
+    if (time > markerEnd) {
       // Setting the value to 200% avoids losing pixel when resizing the player.
-      this.el().style.setProperty('--_cst-marker-played', `200%`);
+      this.el().style.setProperty(cssVar, `200%`);
     }
 
-    if (currentTime < markerStart) {
-      this.el().style.setProperty('--_cst-marker-played', `0%`);
+    if (time < markerStart) {
+      this.el().style.setProperty(cssVar, `0%`);
     }
 
-    if (currentTime >= markerStart && currentTime <= markerEnd) {
-      this.el().style.setProperty('--_cst-marker-played', `${Math.abs(percent) * 100}%`);
+    if (time >= markerStart && time <= markerEnd) {
+      this.el().style.setProperty(cssVar, `${Math.abs(percent) * 100}%`);
     }
+  }
+
+  /**
+   * Updates the buffered portion of the marker.
+   */
+  updateMarkerBuffered() {
+    this.updateMarker(this.player().bufferedEnd(), '--_cst-marker-buffered');
+  }
+
+  /**
+   * Updates the played portion of the marker.
+   */
+  updateMarkerPlayed() {
+    this.updateMarker(this.player().currentTime(), '--_cst-marker-played');
   }
 
   // ***************************************************************************
@@ -116,7 +133,9 @@ class MarkerDisplay extends videojs.getComponent('component') {
    * Disposes of the marker component.
    */
   dispose() {
-    this.player().off('timeupdate', this.updateMarker);
+    this.player().off('timeupdate', this.updateMarkerPlayed);
+    this.player().off('progress', this.updateMarkerBuffered);
+
     super.dispose();
   }
 }
