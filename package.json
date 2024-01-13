@@ -28,12 +28,23 @@
     "cassettator-markers-css": {
       "source": "src/markers/css/cassettator-markers.css",
       "optimize": true
+    },
+    "github": {
+      "publicUrl": "./",
+      "source": [
+        "src/markers/index.html"
+      ],
+      "distDir": "./dist",
+      "isLibrary": false,
+      "outputFormat": "esmodule",
+      "optimize": true
     }
   },
   "scripts": {
     "build": "npm run build:cassettator && npm run build:css",
     "build:cassettator": "rollup -c rollup.config.mjs",
     "build:css": "parcel build --target cassettator-markers-css",
+    "github": "parcel build --target github",
     "start": "parcel -p 6969 src/**/*.html"
   },
   "files": [
