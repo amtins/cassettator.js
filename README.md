@@ -32,4 +32,8 @@ const player = videojs('my-player');
 
 ### Cassettator-markers
 
-Refer to the [plugin](docs/cassettator-markers.md) page.
+A customizable plugin for displaying markers directly in the progress bar.
+
+![Screenshot of the video.js cassettator-markers plugin](docs/images/cassettator-markers.png)
+
+Refer to the [plugin](docs/cassettator-markers.md) page for more details..
