@@ -68,6 +68,8 @@ class MarkerDisplay extends videojs.getComponent('component') {
    * @param {string} cssVar - The CSS variable name.
    */
   updateMarker(time = 0, cssVar) {
+    if(!this.parentComponent_.el().getClientRects().length) return;
+
     const duration = this.player().duration();
     const markersElWidth = this.parentComponent_.el().getClientRects()[0].width;
     const markerOffsetLeft = this.el().offsetLeft;
