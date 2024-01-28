@@ -1,11 +1,12 @@
 {
   "name": "cassettator.js",
-  "version": "0.504.2",
+  "version": "0.504.3",
   "description": "A collection of video.js components and plugins",
   "author": "amtins <amtins.dev@gmail.com>",
   "license": "MIT",
   "keywords": [
     "video.js",
+    "videojs",
     "video",
     "player",
     "markers",
@@ -60,7 +61,7 @@
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-terser": "^0.4.4",
     "buffer": "^6.0.3",
-    "parcel": "^2.10.3",
+    "parcel": "^2.11.0",
     "rollup": "^4.6.1",
     "rollup-plugin-bundle-size": "^1.0.3"
   }
