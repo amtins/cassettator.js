@@ -1,12 +1,13 @@
 {
   "name": "cassettator.js",
-  "version": "0.504.4",
+  "version": "0.504.5",
   "description": "A collection of video.js components and plugins",
   "author": "amtins <amtins.dev@gmail.com>",
   "license": "MIT",
   "keywords": [
     "video.js",
     "videojs",
+    "videojs-plugin",
     "video",
     "player",
     "markers",
